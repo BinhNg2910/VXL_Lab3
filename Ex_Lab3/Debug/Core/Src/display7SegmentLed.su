@@ -1,0 +1,3 @@
+display7SegmentLed.c:9:6:clearAll7SegLed	8	static
+display7SegmentLed.c:16:6:displayParticular7SegLed	16	static
+display7SegmentLed.c:30:6:display7SegLed	16	static
