@@ -32,13 +32,17 @@ void subKeyProcess(int index){
 
 void getKeyInput(){
 	for(int i = 0; i < BTN_NUM; i++){
-		KeyReg0[i] = KeyReg1[i];
-		KeyReg1[i] = KeyReg2[i];
-		KeyReg2[i] = HAL_GPIO_ReadPin(GPIOB, modeBtn[i]);
+		KeyReg2[i] = KeyReg1[i];
+		KeyReg1[i] = KeyReg0[i];
+		KeyReg0[i] = HAL_GPIO_ReadPin(GPIOB, modeBtn[i]);
+//		KeyReg0[i] = KeyReg1[i];
+//		KeyReg1[i] = KeyReg2[i];
+//		KeyReg2[i] = HAL_GPIO_ReadPin(GPIOB, modeBtn[i]);
+
 		if((KeyReg0[i] == KeyReg1[i]) && (KeyReg1[i] == KeyReg2[i])){
 			if(KeyReg3[i] != KeyReg2[i]){
 				KeyReg3[i] = KeyReg2[i];
-				if(KeyReg2[i] == PRESSED_STATE){
+				if(KeyReg3[i] == PRESSED_STATE){
 					//TODO
 					subKeyProcess(i);
 					TimerForKeyPress[i] = 200;

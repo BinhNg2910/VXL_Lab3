@@ -15,11 +15,10 @@ void fsm_automatic_run(){
 		setTimer2(100);
 		break;
 	case RED_GREEN:
-		TurnOffAll();
 		onRed1();
 		onGreen2();
-
 		if(timer2_flag == 1){
+			setTimer2(100);
 			timerLed7Seg1--;
 			timerLed7Seg2--;
 			if(timerLed7Seg2 <= 0){
@@ -28,12 +27,11 @@ void fsm_automatic_run(){
 		}
 
 		if(timer1_flag == 1){
-			status = RED_YELLOW;
 			setTimer1(YellowVal*100);
+			status = RED_YELLOW;
 		}
 		break;
 	case RED_YELLOW:
-		TurnOffAll();
 		onRed1();
 		onYellow2();
 
@@ -50,12 +48,11 @@ void fsm_automatic_run(){
 		}
 
 		if(timer1_flag == 1){
-			status = GREEN_RED;
 			setTimer1(GreenVal*100);
+			status = GREEN_RED;
 		}
 		break;
 	case GREEN_RED:
-		TurnOffAll();
 		onGreen1();
 		onRed2();
 
@@ -68,12 +65,11 @@ void fsm_automatic_run(){
 			timerLed7Seg2--;
 		}
 		if(timer1_flag == 1){
-			status = YELLOW_RED;
 			setTimer1(YellowVal*100);
+			status = YELLOW_RED;
 		}
 		break;
 	case YELLOW_RED:
-		TurnOffAll();
 		onYellow1();
 		onRed2();
 
@@ -89,8 +85,8 @@ void fsm_automatic_run(){
 			}
 		}
 		if(timer1_flag == 1){
-			status = RED_GREEN;
 			setTimer1(GreenVal*100);
+			status = RED_GREEN;
 		}
 		break;
 	default:

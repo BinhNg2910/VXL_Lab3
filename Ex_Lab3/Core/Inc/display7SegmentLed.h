@@ -10,8 +10,8 @@
 
 #include "global.h"
 
-void clearAll7SegLed();
-void displayParticular7SegLed(int num);
-void display7SegLed(int num);
+void clearSeg();
+void displaySegLed(int num);
+void displayNum(int num);
 
 #endif /* INC_DISPLAY7SEGMENTLED_H_ */

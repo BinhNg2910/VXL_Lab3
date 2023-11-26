@@ -31,20 +31,20 @@ void setTimer2(int duration){
 	timer2_flag = 0;
 }
 void setTimer3(int duration){
-	timer1_counter = duration;
-	timer1_flag = 0;
+	timer3_counter = duration;
+	timer3_flag = 0;
 }
 void setTimer4(int duration){
-	timer2_counter = duration;
-	timer2_flag = 0;
+	timer4_counter = duration;
+	timer4_flag = 0;
 }
 void setTimer5(int duration){
-	timer1_counter = duration;
-	timer1_flag = 0;
+	timer5_counter = duration;
+	timer5_flag = 0;
 }
 void setTimer6(int duration){
-	timer2_counter = duration;
-	timer2_flag = 0;
+	timer6_counter = duration;
+	timer6_flag = 0;
 }
 
 void timerRun(){

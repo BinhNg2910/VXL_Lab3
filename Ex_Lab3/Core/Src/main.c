@@ -22,11 +22,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-//#include "software_timer.h"
-//#include "button.h"
-//#include "fsm_automatic.h"
-//#include "fsm_manual.h"
-//#include "traffic_light.h"
+#include "software_timer.h"
+#include "button.h"
+#include "fsm_automatic.h"
+#include "fsm_manual.h"
+#include "traffic_light.h"
 #include "global.h"
 /* USER CODE END Includes */
 
@@ -101,26 +101,18 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   setTimer3(1);
   setTimer4(1);
+//  timer3_flag = 1;
+//  timer4_flag = 1;
   timerLed7Seg1 = RedVal;
   timerLed7Seg2 = GreenVal;
   RedCurr = RedVal;
   GreenCurr = GreenVal;
   YellowCurr = YellowVal;
   status = INIT;
-
+//  clearSeg();
   while (1)
   {
-	  if(timer3_flag == 1){
-		  setTimer3(10);
-		  UpdateLeg7Seg();
-	  }
-	  if(timer4_flag == 1){
-		  setTimer4(25);
-		  displayParticular7SegLed(led7Seg_index++);
-		  if(led7Seg_index >= 4){
-			  led7Seg_index = 0;
-		  }
-	  }
+	  timerProcess();
 	  fsm_automatic_run();
 	  fsm_manual_run();
 
