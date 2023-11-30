@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  0002005c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00009e99  00000000  00000000  00020085  2**0
+ 12 .debug_info   00009e8b  00000000  00000000  00020085  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00001ca1  00000000  00000000  00029f1e  2**0
+ 13 .debug_abbrev 00001c9f  00000000  00000000  00029f10  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000ab0  00000000  00000000  0002bbc0  2**3
+ 14 .debug_aranges 00000ab0  00000000  00000000  0002bbb0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000988  00000000  00000000  0002c670  2**3
+ 15 .debug_ranges 00000988  00000000  00000000  0002c660  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0001716c  00000000  00000000  0002cff8  2**0
+ 16 .debug_macro  0001716c  00000000  00000000  0002cfe8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000c874  00000000  00000000  00044164  2**0
+ 17 .debug_line   0000c877  00000000  00000000  00044154  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008244c  00000000  00000000  000509d8  2**0
+ 18 .debug_str    0008244c  00000000  00000000  000509cb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000d2e24  2**0
+ 19 .comment      00000053  00000000  00000000  000d2e17  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000296c  00000000  00000000  000d2e78  2**2
+ 20 .debug_frame  0000296c  00000000  00000000  000d2e6c  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1200,364 +1200,339 @@ void fsm_automatic_run(){
 void fsm_manual_run(){
  800092c:	b580      	push	{r7, lr}
  800092e:	af00      	add	r7, sp, #0
-	switch (status){
+	switch(status){
  8000930:	4b90      	ldr	r3, [pc, #576]	; (8000b74 <fsm_manual_run+0x248>)
  8000932:	681b      	ldr	r3, [r3, #0]
  8000934:	2b0e      	cmp	r3, #14
- 8000936:	d053      	beq.n	80009e0 <fsm_manual_run+0xb4>
+ 8000936:	d056      	beq.n	80009e6 <fsm_manual_run+0xba>
  8000938:	2b0e      	cmp	r3, #14
- 800093a:	f300 810f 	bgt.w	8000b5c <fsm_manual_run+0x230>
+ 800093a:	f300 8118 	bgt.w	8000b6e <fsm_manual_run+0x242>
  800093e:	2b0c      	cmp	r3, #12
  8000940:	d003      	beq.n	800094a <fsm_manual_run+0x1e>
  8000942:	2b0d      	cmp	r3, #13
- 8000944:	f000 8098 	beq.w	8000a78 <fsm_manual_run+0x14c>
- 8000948:	e108      	b.n	8000b5c <fsm_manual_run+0x230>
-		case MAN_RED:
-			if(timer5_flag == 1){
+ 8000944:	f000 809e 	beq.w	8000a84 <fsm_manual_run+0x158>
+			break;
+	}
+//	if(isButtonPressed(2) == 1){
+//		timerLed7Seg1 = RedVal;
+//	}
+}
+ 8000948:	e111      	b.n	8000b6e <fsm_manual_run+0x242>
+			 if(timer5_flag == 1){
  800094a:	4b8b      	ldr	r3, [pc, #556]	; (8000b78 <fsm_manual_run+0x24c>)
  800094c:	681b      	ldr	r3, [r3, #0]
  800094e:	2b01      	cmp	r3, #1
- 8000950:	d110      	bne.n	8000974 <fsm_manual_run+0x48>
-				setTimer5(25);
+ 8000950:	d113      	bne.n	800097a <fsm_manual_run+0x4e>
+			 	setTimer5(25);
  8000952:	2019      	movs	r0, #25
  8000954:	f000 fb12 	bl	8000f7c <setTimer5>
-				if(ToggleFlag == 0){
+			 	if(ToggleFlag == 0){
  8000958:	4b88      	ldr	r3, [pc, #544]	; (8000b7c <fsm_manual_run+0x250>)
  800095a:	681b      	ldr	r3, [r3, #0]
  800095c:	2b00      	cmp	r3, #0
- 800095e:	d107      	bne.n	8000970 <fsm_manual_run+0x44>
-					ToggleFlag = 1;
- 8000960:	4b86      	ldr	r3, [pc, #536]	; (8000b7c <fsm_manual_run+0x250>)
- 8000962:	2201      	movs	r2, #1
- 8000964:	601a      	str	r2, [r3, #0]
-					onRed1();
- 8000966:	f000 fc61 	bl	800122c <onRed1>
-					onRed2();
- 800096a:	f000 fca1 	bl	80012b0 <onRed2>
- 800096e:	e001      	b.n	8000974 <fsm_manual_run+0x48>
-				} else {
-					TurnOffAll();
- 8000970:	f000 fce0 	bl	8001334 <TurnOffAll>
-				}
-			}
+ 800095e:	d104      	bne.n	800096a <fsm_manual_run+0x3e>
+			 		onRed1();
+ 8000960:	f000 fc64 	bl	800122c <onRed1>
+			 		onRed2();
+ 8000964:	f000 fca4 	bl	80012b0 <onRed2>
+ 8000968:	e001      	b.n	800096e <fsm_manual_run+0x42>
+			 		TurnOffAll();
+ 800096a:	f000 fce3 	bl	8001334 <TurnOffAll>
+			 	ToggleFlag = 1 - ToggleFlag;
+ 800096e:	4b83      	ldr	r3, [pc, #524]	; (8000b7c <fsm_manual_run+0x250>)
+ 8000970:	681b      	ldr	r3, [r3, #0]
+ 8000972:	f1c3 0301 	rsb	r3, r3, #1
+ 8000976:	4a81      	ldr	r2, [pc, #516]	; (8000b7c <fsm_manual_run+0x250>)
+ 8000978:	6013      	str	r3, [r2, #0]
 			if(isButtonPressed(0) == 1){
- 8000974:	2000      	movs	r0, #0
- 8000976:	f7ff fbe9 	bl	800014c <isButtonPressed>
- 800097a:	4603      	mov	r3, r0
- 800097c:	2b01      	cmp	r3, #1
- 800097e:	d10c      	bne.n	800099a <fsm_manual_run+0x6e>
+ 800097a:	2000      	movs	r0, #0
+ 800097c:	f7ff fbe6 	bl	800014c <isButtonPressed>
+ 8000980:	4603      	mov	r3, r0
+ 8000982:	2b01      	cmp	r3, #1
+ 8000984:	d10c      	bne.n	80009a0 <fsm_manual_run+0x74>
 				status = MAN_YELLOW;
- 8000980:	4b7c      	ldr	r3, [pc, #496]	; (8000b74 <fsm_manual_run+0x248>)
- 8000982:	220e      	movs	r2, #14
- 8000984:	601a      	str	r2, [r3, #0]
+ 8000986:	4b7b      	ldr	r3, [pc, #492]	; (8000b74 <fsm_manual_run+0x248>)
+ 8000988:	220e      	movs	r2, #14
+ 800098a:	601a      	str	r2, [r3, #0]
 				timerLed7Seg1 = YellowVal;
- 8000986:	4b7e      	ldr	r3, [pc, #504]	; (8000b80 <fsm_manual_run+0x254>)
- 8000988:	681b      	ldr	r3, [r3, #0]
- 800098a:	4a7e      	ldr	r2, [pc, #504]	; (8000b84 <fsm_manual_run+0x258>)
- 800098c:	6013      	str	r3, [r2, #0]
+ 800098c:	4b7c      	ldr	r3, [pc, #496]	; (8000b80 <fsm_manual_run+0x254>)
+ 800098e:	681b      	ldr	r3, [r3, #0]
+ 8000990:	4a7c      	ldr	r2, [pc, #496]	; (8000b84 <fsm_manual_run+0x258>)
+ 8000992:	6013      	str	r3, [r2, #0]
 				timerLed7Seg2 = 3;
- 800098e:	4b7e      	ldr	r3, [pc, #504]	; (8000b88 <fsm_manual_run+0x25c>)
- 8000990:	2203      	movs	r2, #3
- 8000992:	601a      	str	r2, [r3, #0]
+ 8000994:	4b7c      	ldr	r3, [pc, #496]	; (8000b88 <fsm_manual_run+0x25c>)
+ 8000996:	2203      	movs	r2, #3
+ 8000998:	601a      	str	r2, [r3, #0]
 				setTimer5(1);
- 8000994:	2001      	movs	r0, #1
- 8000996:	f000 faf1 	bl	8000f7c <setTimer5>
-			}
-			if(isButtonPressed(1) == 1){
  800099a:	2001      	movs	r0, #1
- 800099c:	f7ff fbd6 	bl	800014c <isButtonPressed>
- 80009a0:	4603      	mov	r3, r0
- 80009a2:	2b01      	cmp	r3, #1
- 80009a4:	d110      	bne.n	80009c8 <fsm_manual_run+0x9c>
+ 800099c:	f000 faee 	bl	8000f7c <setTimer5>
+			if(isButtonPressed(1) == 1){
+ 80009a0:	2001      	movs	r0, #1
+ 80009a2:	f7ff fbd3 	bl	800014c <isButtonPressed>
+ 80009a6:	4603      	mov	r3, r0
+ 80009a8:	2b01      	cmp	r3, #1
+ 80009aa:	d110      	bne.n	80009ce <fsm_manual_run+0xa2>
 				RedCurr++;
- 80009a6:	4b79      	ldr	r3, [pc, #484]	; (8000b8c <fsm_manual_run+0x260>)
- 80009a8:	681b      	ldr	r3, [r3, #0]
- 80009aa:	3301      	adds	r3, #1
- 80009ac:	4a77      	ldr	r2, [pc, #476]	; (8000b8c <fsm_manual_run+0x260>)
- 80009ae:	6013      	str	r3, [r2, #0]
+ 80009ac:	4b77      	ldr	r3, [pc, #476]	; (8000b8c <fsm_manual_run+0x260>)
+ 80009ae:	681b      	ldr	r3, [r3, #0]
+ 80009b0:	3301      	adds	r3, #1
+ 80009b2:	4a76      	ldr	r2, [pc, #472]	; (8000b8c <fsm_manual_run+0x260>)
+ 80009b4:	6013      	str	r3, [r2, #0]
 				timerLed7Seg1++;
- 80009b0:	4b74      	ldr	r3, [pc, #464]	; (8000b84 <fsm_manual_run+0x258>)
- 80009b2:	681b      	ldr	r3, [r3, #0]
- 80009b4:	3301      	adds	r3, #1
- 80009b6:	4a73      	ldr	r2, [pc, #460]	; (8000b84 <fsm_manual_run+0x258>)
- 80009b8:	6013      	str	r3, [r2, #0]
+ 80009b6:	4b73      	ldr	r3, [pc, #460]	; (8000b84 <fsm_manual_run+0x258>)
+ 80009b8:	681b      	ldr	r3, [r3, #0]
+ 80009ba:	3301      	adds	r3, #1
+ 80009bc:	4a71      	ldr	r2, [pc, #452]	; (8000b84 <fsm_manual_run+0x258>)
+ 80009be:	6013      	str	r3, [r2, #0]
 				if(RedCurr >= 100){
- 80009ba:	4b74      	ldr	r3, [pc, #464]	; (8000b8c <fsm_manual_run+0x260>)
- 80009bc:	681b      	ldr	r3, [r3, #0]
- 80009be:	2b63      	cmp	r3, #99	; 0x63
- 80009c0:	dd02      	ble.n	80009c8 <fsm_manual_run+0x9c>
+ 80009c0:	4b72      	ldr	r3, [pc, #456]	; (8000b8c <fsm_manual_run+0x260>)
+ 80009c2:	681b      	ldr	r3, [r3, #0]
+ 80009c4:	2b63      	cmp	r3, #99	; 0x63
+ 80009c6:	dd02      	ble.n	80009ce <fsm_manual_run+0xa2>
 					RedCurr = 2;
- 80009c2:	4b72      	ldr	r3, [pc, #456]	; (8000b8c <fsm_manual_run+0x260>)
- 80009c4:	2202      	movs	r2, #2
- 80009c6:	601a      	str	r2, [r3, #0]
-				}
-			}
-			if(isButtonPressed(2) == 2){
- 80009c8:	2002      	movs	r0, #2
- 80009ca:	f7ff fbbf 	bl	800014c <isButtonPressed>
- 80009ce:	4603      	mov	r3, r0
- 80009d0:	2b02      	cmp	r3, #2
- 80009d2:	f040 80be 	bne.w	8000b52 <fsm_manual_run+0x226>
+ 80009c8:	4b70      	ldr	r3, [pc, #448]	; (8000b8c <fsm_manual_run+0x260>)
+ 80009ca:	2202      	movs	r2, #2
+ 80009cc:	601a      	str	r2, [r3, #0]
+			if(isButtonPressed(2) == 1){
+ 80009ce:	2002      	movs	r0, #2
+ 80009d0:	f7ff fbbc 	bl	800014c <isButtonPressed>
+ 80009d4:	4603      	mov	r3, r0
+ 80009d6:	2b01      	cmp	r3, #1
+ 80009d8:	f040 80c4 	bne.w	8000b64 <fsm_manual_run+0x238>
 				RedVal = RedCurr;
- 80009d6:	4b6d      	ldr	r3, [pc, #436]	; (8000b8c <fsm_manual_run+0x260>)
- 80009d8:	681b      	ldr	r3, [r3, #0]
- 80009da:	4a6d      	ldr	r2, [pc, #436]	; (8000b90 <fsm_manual_run+0x264>)
- 80009dc:	6013      	str	r3, [r2, #0]
-			}
+ 80009dc:	4b6b      	ldr	r3, [pc, #428]	; (8000b8c <fsm_manual_run+0x260>)
+ 80009de:	681b      	ldr	r3, [r3, #0]
+ 80009e0:	4a6b      	ldr	r2, [pc, #428]	; (8000b90 <fsm_manual_run+0x264>)
+ 80009e2:	6013      	str	r3, [r2, #0]
 			break;
- 80009de:	e0b8      	b.n	8000b52 <fsm_manual_run+0x226>
-		case MAN_YELLOW:
+ 80009e4:	e0be      	b.n	8000b64 <fsm_manual_run+0x238>
 			if(timer5_flag == 1){
- 80009e0:	4b65      	ldr	r3, [pc, #404]	; (8000b78 <fsm_manual_run+0x24c>)
- 80009e2:	681b      	ldr	r3, [r3, #0]
- 80009e4:	2b01      	cmp	r3, #1
- 80009e6:	d110      	bne.n	8000a0a <fsm_manual_run+0xde>
+ 80009e6:	4b64      	ldr	r3, [pc, #400]	; (8000b78 <fsm_manual_run+0x24c>)
+ 80009e8:	681b      	ldr	r3, [r3, #0]
+ 80009ea:	2b01      	cmp	r3, #1
+ 80009ec:	d113      	bne.n	8000a16 <fsm_manual_run+0xea>
 				setTimer5(25);
- 80009e8:	2019      	movs	r0, #25
- 80009ea:	f000 fac7 	bl	8000f7c <setTimer5>
+ 80009ee:	2019      	movs	r0, #25
+ 80009f0:	f000 fac4 	bl	8000f7c <setTimer5>
 				if(ToggleFlag == 0){
- 80009ee:	4b63      	ldr	r3, [pc, #396]	; (8000b7c <fsm_manual_run+0x250>)
- 80009f0:	681b      	ldr	r3, [r3, #0]
- 80009f2:	2b00      	cmp	r3, #0
- 80009f4:	d107      	bne.n	8000a06 <fsm_manual_run+0xda>
-					ToggleFlag = 1;
- 80009f6:	4b61      	ldr	r3, [pc, #388]	; (8000b7c <fsm_manual_run+0x250>)
- 80009f8:	2201      	movs	r2, #1
- 80009fa:	601a      	str	r2, [r3, #0]
+ 80009f4:	4b61      	ldr	r3, [pc, #388]	; (8000b7c <fsm_manual_run+0x250>)
+ 80009f6:	681b      	ldr	r3, [r3, #0]
+ 80009f8:	2b00      	cmp	r3, #0
+ 80009fa:	d104      	bne.n	8000a06 <fsm_manual_run+0xda>
 					onYellow1();
  80009fc:	f000 fc42 	bl	8001284 <onYellow1>
 					onYellow2();
  8000a00:	f000 fc82 	bl	8001308 <onYellow2>
  8000a04:	e001      	b.n	8000a0a <fsm_manual_run+0xde>
-				} else {
 					TurnOffAll();
  8000a06:	f000 fc95 	bl	8001334 <TurnOffAll>
-				}
-			}
+			 	ToggleFlag = 1 - ToggleFlag;
+ 8000a0a:	4b5c      	ldr	r3, [pc, #368]	; (8000b7c <fsm_manual_run+0x250>)
+ 8000a0c:	681b      	ldr	r3, [r3, #0]
+ 8000a0e:	f1c3 0301 	rsb	r3, r3, #1
+ 8000a12:	4a5a      	ldr	r2, [pc, #360]	; (8000b7c <fsm_manual_run+0x250>)
+ 8000a14:	6013      	str	r3, [r2, #0]
 			if(isButtonPressed(0) == 1){
- 8000a0a:	2000      	movs	r0, #0
- 8000a0c:	f7ff fb9e 	bl	800014c <isButtonPressed>
- 8000a10:	4603      	mov	r3, r0
- 8000a12:	2b01      	cmp	r3, #1
- 8000a14:	d10c      	bne.n	8000a30 <fsm_manual_run+0x104>
+ 8000a16:	2000      	movs	r0, #0
+ 8000a18:	f7ff fb98 	bl	800014c <isButtonPressed>
+ 8000a1c:	4603      	mov	r3, r0
+ 8000a1e:	2b01      	cmp	r3, #1
+ 8000a20:	d10c      	bne.n	8000a3c <fsm_manual_run+0x110>
 				status = MAN_GREEN;
- 8000a16:	4b57      	ldr	r3, [pc, #348]	; (8000b74 <fsm_manual_run+0x248>)
- 8000a18:	220d      	movs	r2, #13
- 8000a1a:	601a      	str	r2, [r3, #0]
+ 8000a22:	4b54      	ldr	r3, [pc, #336]	; (8000b74 <fsm_manual_run+0x248>)
+ 8000a24:	220d      	movs	r2, #13
+ 8000a26:	601a      	str	r2, [r3, #0]
 				timerLed7Seg1 = GreenVal;
- 8000a1c:	4b5d      	ldr	r3, [pc, #372]	; (8000b94 <fsm_manual_run+0x268>)
- 8000a1e:	681b      	ldr	r3, [r3, #0]
- 8000a20:	4a58      	ldr	r2, [pc, #352]	; (8000b84 <fsm_manual_run+0x258>)
- 8000a22:	6013      	str	r3, [r2, #0]
+ 8000a28:	4b5a      	ldr	r3, [pc, #360]	; (8000b94 <fsm_manual_run+0x268>)
+ 8000a2a:	681b      	ldr	r3, [r3, #0]
+ 8000a2c:	4a55      	ldr	r2, [pc, #340]	; (8000b84 <fsm_manual_run+0x258>)
+ 8000a2e:	6013      	str	r3, [r2, #0]
 				timerLed7Seg2 = 4;
- 8000a24:	4b58      	ldr	r3, [pc, #352]	; (8000b88 <fsm_manual_run+0x25c>)
- 8000a26:	2204      	movs	r2, #4
- 8000a28:	601a      	str	r2, [r3, #0]
+ 8000a30:	4b55      	ldr	r3, [pc, #340]	; (8000b88 <fsm_manual_run+0x25c>)
+ 8000a32:	2204      	movs	r2, #4
+ 8000a34:	601a      	str	r2, [r3, #0]
 				setTimer5(1);
- 8000a2a:	2001      	movs	r0, #1
- 8000a2c:	f000 faa6 	bl	8000f7c <setTimer5>
-			}
+ 8000a36:	2001      	movs	r0, #1
+ 8000a38:	f000 faa0 	bl	8000f7c <setTimer5>
 			if(isButtonPressed(1) == 1){
- 8000a30:	2001      	movs	r0, #1
- 8000a32:	f7ff fb8b 	bl	800014c <isButtonPressed>
- 8000a36:	4603      	mov	r3, r0
- 8000a38:	2b01      	cmp	r3, #1
- 8000a3a:	d112      	bne.n	8000a62 <fsm_manual_run+0x136>
+ 8000a3c:	2001      	movs	r0, #1
+ 8000a3e:	f7ff fb85 	bl	800014c <isButtonPressed>
+ 8000a42:	4603      	mov	r3, r0
+ 8000a44:	2b01      	cmp	r3, #1
+ 8000a46:	d112      	bne.n	8000a6e <fsm_manual_run+0x142>
 				YellowCurr++;
- 8000a3c:	4b56      	ldr	r3, [pc, #344]	; (8000b98 <fsm_manual_run+0x26c>)
- 8000a3e:	681b      	ldr	r3, [r3, #0]
- 8000a40:	3301      	adds	r3, #1
- 8000a42:	4a55      	ldr	r2, [pc, #340]	; (8000b98 <fsm_manual_run+0x26c>)
- 8000a44:	6013      	str	r3, [r2, #0]
+ 8000a48:	4b53      	ldr	r3, [pc, #332]	; (8000b98 <fsm_manual_run+0x26c>)
+ 8000a4a:	681b      	ldr	r3, [r3, #0]
+ 8000a4c:	3301      	adds	r3, #1
+ 8000a4e:	4a52      	ldr	r2, [pc, #328]	; (8000b98 <fsm_manual_run+0x26c>)
+ 8000a50:	6013      	str	r3, [r2, #0]
 				timerLed7Seg1++;
- 8000a46:	4b4f      	ldr	r3, [pc, #316]	; (8000b84 <fsm_manual_run+0x258>)
- 8000a48:	681b      	ldr	r3, [r3, #0]
- 8000a4a:	3301      	adds	r3, #1
- 8000a4c:	4a4d      	ldr	r2, [pc, #308]	; (8000b84 <fsm_manual_run+0x258>)
- 8000a4e:	6013      	str	r3, [r2, #0]
+ 8000a52:	4b4c      	ldr	r3, [pc, #304]	; (8000b84 <fsm_manual_run+0x258>)
+ 8000a54:	681b      	ldr	r3, [r3, #0]
+ 8000a56:	3301      	adds	r3, #1
+ 8000a58:	4a4a      	ldr	r2, [pc, #296]	; (8000b84 <fsm_manual_run+0x258>)
+ 8000a5a:	6013      	str	r3, [r2, #0]
 				if(YellowCurr >= RedVal){
- 8000a50:	4b51      	ldr	r3, [pc, #324]	; (8000b98 <fsm_manual_run+0x26c>)
- 8000a52:	681a      	ldr	r2, [r3, #0]
- 8000a54:	4b4e      	ldr	r3, [pc, #312]	; (8000b90 <fsm_manual_run+0x264>)
- 8000a56:	681b      	ldr	r3, [r3, #0]
- 8000a58:	429a      	cmp	r2, r3
- 8000a5a:	db02      	blt.n	8000a62 <fsm_manual_run+0x136>
-					YellowCurr = 1;
  8000a5c:	4b4e      	ldr	r3, [pc, #312]	; (8000b98 <fsm_manual_run+0x26c>)
- 8000a5e:	2201      	movs	r2, #1
- 8000a60:	601a      	str	r2, [r3, #0]
-				}
-			}
-			if(isButtonPressed(2) == 2){
- 8000a62:	2002      	movs	r0, #2
- 8000a64:	f7ff fb72 	bl	800014c <isButtonPressed>
- 8000a68:	4603      	mov	r3, r0
- 8000a6a:	2b02      	cmp	r3, #2
- 8000a6c:	d173      	bne.n	8000b56 <fsm_manual_run+0x22a>
-				YellowVal = YellowCurr;
- 8000a6e:	4b4a      	ldr	r3, [pc, #296]	; (8000b98 <fsm_manual_run+0x26c>)
- 8000a70:	681b      	ldr	r3, [r3, #0]
- 8000a72:	4a43      	ldr	r2, [pc, #268]	; (8000b80 <fsm_manual_run+0x254>)
- 8000a74:	6013      	str	r3, [r2, #0]
-			}
-			break;
- 8000a76:	e06e      	b.n	8000b56 <fsm_manual_run+0x22a>
-		case MAN_GREEN:
-			if(timer5_flag == 1){
- 8000a78:	4b3f      	ldr	r3, [pc, #252]	; (8000b78 <fsm_manual_run+0x24c>)
- 8000a7a:	681b      	ldr	r3, [r3, #0]
- 8000a7c:	2b01      	cmp	r3, #1
- 8000a7e:	d110      	bne.n	8000aa2 <fsm_manual_run+0x176>
-				setTimer5(10);
- 8000a80:	200a      	movs	r0, #10
- 8000a82:	f000 fa7b 	bl	8000f7c <setTimer5>
-				if(ToggleFlag == 0){
- 8000a86:	4b3d      	ldr	r3, [pc, #244]	; (8000b7c <fsm_manual_run+0x250>)
- 8000a88:	681b      	ldr	r3, [r3, #0]
- 8000a8a:	2b00      	cmp	r3, #0
- 8000a8c:	d107      	bne.n	8000a9e <fsm_manual_run+0x172>
-					ToggleFlag = 1;
- 8000a8e:	4b3b      	ldr	r3, [pc, #236]	; (8000b7c <fsm_manual_run+0x250>)
- 8000a90:	2201      	movs	r2, #1
- 8000a92:	601a      	str	r2, [r3, #0]
-					onGreen1();
- 8000a94:	f000 fbe0 	bl	8001258 <onGreen1>
-					onGreen2();
- 8000a98:	f000 fc20 	bl	80012dc <onGreen2>
- 8000a9c:	e001      	b.n	8000aa2 <fsm_manual_run+0x176>
-				} else {
-					TurnOffAll();
- 8000a9e:	f000 fc49 	bl	8001334 <TurnOffAll>
-				}
-			}
-			if(isButtonPressed(0) == 1){
- 8000aa2:	2000      	movs	r0, #0
- 8000aa4:	f7ff fb52 	bl	800014c <isButtonPressed>
- 8000aa8:	4603      	mov	r3, r0
- 8000aaa:	2b01      	cmp	r3, #1
- 8000aac:	d126      	bne.n	8000afc <fsm_manual_run+0x1d0>
-				status = RED_GREEN;
- 8000aae:	4b31      	ldr	r3, [pc, #196]	; (8000b74 <fsm_manual_run+0x248>)
- 8000ab0:	2201      	movs	r2, #1
- 8000ab2:	601a      	str	r2, [r3, #0]
-				GreenVal = RedVal - YellowVal;
- 8000ab4:	4b36      	ldr	r3, [pc, #216]	; (8000b90 <fsm_manual_run+0x264>)
- 8000ab6:	681a      	ldr	r2, [r3, #0]
- 8000ab8:	4b31      	ldr	r3, [pc, #196]	; (8000b80 <fsm_manual_run+0x254>)
- 8000aba:	681b      	ldr	r3, [r3, #0]
- 8000abc:	1ad3      	subs	r3, r2, r3
- 8000abe:	4a35      	ldr	r2, [pc, #212]	; (8000b94 <fsm_manual_run+0x268>)
- 8000ac0:	6013      	str	r3, [r2, #0]
-				timerLed7Seg1 = RedVal;
- 8000ac2:	4b33      	ldr	r3, [pc, #204]	; (8000b90 <fsm_manual_run+0x264>)
- 8000ac4:	681b      	ldr	r3, [r3, #0]
- 8000ac6:	4a2f      	ldr	r2, [pc, #188]	; (8000b84 <fsm_manual_run+0x258>)
- 8000ac8:	6013      	str	r3, [r2, #0]
-				timerLed7Seg2 = GreenVal;
- 8000aca:	4b32      	ldr	r3, [pc, #200]	; (8000b94 <fsm_manual_run+0x268>)
- 8000acc:	681b      	ldr	r3, [r3, #0]
- 8000ace:	4a2e      	ldr	r2, [pc, #184]	; (8000b88 <fsm_manual_run+0x25c>)
- 8000ad0:	6013      	str	r3, [r2, #0]
-				UpdateLeg7Seg();
- 8000ad2:	f000 f867 	bl	8000ba4 <UpdateLeg7Seg>
-				setTimer1(GreenVal*100);
- 8000ad6:	4b2f      	ldr	r3, [pc, #188]	; (8000b94 <fsm_manual_run+0x268>)
- 8000ad8:	681b      	ldr	r3, [r3, #0]
- 8000ada:	2264      	movs	r2, #100	; 0x64
- 8000adc:	fb02 f303 	mul.w	r3, r2, r3
- 8000ae0:	4618      	mov	r0, r3
- 8000ae2:	f000 f9fb 	bl	8000edc <setTimer1>
-				setTimer2(100);
- 8000ae6:	2064      	movs	r0, #100	; 0x64
- 8000ae8:	f000 fa0c 	bl	8000f04 <setTimer2>
-
-				setTimer4(1);
- 8000aec:	2001      	movs	r0, #1
- 8000aee:	f000 fa31 	bl	8000f54 <setTimer4>
-				led7Seg_index = 0;
- 8000af2:	4b2a      	ldr	r3, [pc, #168]	; (8000b9c <fsm_manual_run+0x270>)
- 8000af4:	2200      	movs	r2, #0
- 8000af6:	601a      	str	r2, [r3, #0]
-				clearSeg();
- 8000af8:	f7ff fbd8 	bl	80002ac <clearSeg>
-			}
-			if(isButtonPressed(1) == 1){
- 8000afc:	2001      	movs	r0, #1
- 8000afe:	f7ff fb25 	bl	800014c <isButtonPressed>
- 8000b02:	4603      	mov	r3, r0
- 8000b04:	2b01      	cmp	r3, #1
- 8000b06:	d112      	bne.n	8000b2e <fsm_manual_run+0x202>
-				GreenCurr++;
- 8000b08:	4b25      	ldr	r3, [pc, #148]	; (8000ba0 <fsm_manual_run+0x274>)
- 8000b0a:	681b      	ldr	r3, [r3, #0]
- 8000b0c:	3301      	adds	r3, #1
- 8000b0e:	4a24      	ldr	r2, [pc, #144]	; (8000ba0 <fsm_manual_run+0x274>)
- 8000b10:	6013      	str	r3, [r2, #0]
-				timerLed7Seg1++;
- 8000b12:	4b1c      	ldr	r3, [pc, #112]	; (8000b84 <fsm_manual_run+0x258>)
- 8000b14:	681b      	ldr	r3, [r3, #0]
- 8000b16:	3301      	adds	r3, #1
- 8000b18:	4a1a      	ldr	r2, [pc, #104]	; (8000b84 <fsm_manual_run+0x258>)
- 8000b1a:	6013      	str	r3, [r2, #0]
-				if(YellowCurr >= RedVal){
- 8000b1c:	4b1e      	ldr	r3, [pc, #120]	; (8000b98 <fsm_manual_run+0x26c>)
- 8000b1e:	681a      	ldr	r2, [r3, #0]
- 8000b20:	4b1b      	ldr	r3, [pc, #108]	; (8000b90 <fsm_manual_run+0x264>)
- 8000b22:	681b      	ldr	r3, [r3, #0]
- 8000b24:	429a      	cmp	r2, r3
- 8000b26:	db02      	blt.n	8000b2e <fsm_manual_run+0x202>
+ 8000a5e:	681a      	ldr	r2, [r3, #0]
+ 8000a60:	4b4b      	ldr	r3, [pc, #300]	; (8000b90 <fsm_manual_run+0x264>)
+ 8000a62:	681b      	ldr	r3, [r3, #0]
+ 8000a64:	429a      	cmp	r2, r3
+ 8000a66:	db02      	blt.n	8000a6e <fsm_manual_run+0x142>
 					YellowCurr = 1;
- 8000b28:	4b1b      	ldr	r3, [pc, #108]	; (8000b98 <fsm_manual_run+0x26c>)
- 8000b2a:	2201      	movs	r2, #1
- 8000b2c:	601a      	str	r2, [r3, #0]
-				}
-			}
-			if(isButtonPressed(2) == 2){
- 8000b2e:	2002      	movs	r0, #2
- 8000b30:	f7ff fb0c 	bl	800014c <isButtonPressed>
- 8000b34:	4603      	mov	r3, r0
- 8000b36:	2b02      	cmp	r3, #2
- 8000b38:	d10f      	bne.n	8000b5a <fsm_manual_run+0x22e>
+ 8000a68:	4b4b      	ldr	r3, [pc, #300]	; (8000b98 <fsm_manual_run+0x26c>)
+ 8000a6a:	2201      	movs	r2, #1
+ 8000a6c:	601a      	str	r2, [r3, #0]
+			if(isButtonPressed(2) == 1){
+ 8000a6e:	2002      	movs	r0, #2
+ 8000a70:	f7ff fb6c 	bl	800014c <isButtonPressed>
+ 8000a74:	4603      	mov	r3, r0
+ 8000a76:	2b01      	cmp	r3, #1
+ 8000a78:	d176      	bne.n	8000b68 <fsm_manual_run+0x23c>
+				YellowVal = YellowCurr;
+ 8000a7a:	4b47      	ldr	r3, [pc, #284]	; (8000b98 <fsm_manual_run+0x26c>)
+ 8000a7c:	681b      	ldr	r3, [r3, #0]
+ 8000a7e:	4a40      	ldr	r2, [pc, #256]	; (8000b80 <fsm_manual_run+0x254>)
+ 8000a80:	6013      	str	r3, [r2, #0]
+			break;
+ 8000a82:	e071      	b.n	8000b68 <fsm_manual_run+0x23c>
+			if(timer5_flag == 1){
+ 8000a84:	4b3c      	ldr	r3, [pc, #240]	; (8000b78 <fsm_manual_run+0x24c>)
+ 8000a86:	681b      	ldr	r3, [r3, #0]
+ 8000a88:	2b01      	cmp	r3, #1
+ 8000a8a:	d113      	bne.n	8000ab4 <fsm_manual_run+0x188>
+				setTimer5(25);
+ 8000a8c:	2019      	movs	r0, #25
+ 8000a8e:	f000 fa75 	bl	8000f7c <setTimer5>
+				if(ToggleFlag == 0){
+ 8000a92:	4b3a      	ldr	r3, [pc, #232]	; (8000b7c <fsm_manual_run+0x250>)
+ 8000a94:	681b      	ldr	r3, [r3, #0]
+ 8000a96:	2b00      	cmp	r3, #0
+ 8000a98:	d104      	bne.n	8000aa4 <fsm_manual_run+0x178>
+					onGreen1();
+ 8000a9a:	f000 fbdd 	bl	8001258 <onGreen1>
+					onGreen2();
+ 8000a9e:	f000 fc1d 	bl	80012dc <onGreen2>
+ 8000aa2:	e001      	b.n	8000aa8 <fsm_manual_run+0x17c>
+					TurnOffAll();
+ 8000aa4:	f000 fc46 	bl	8001334 <TurnOffAll>
+			 	ToggleFlag = 1 - ToggleFlag;
+ 8000aa8:	4b34      	ldr	r3, [pc, #208]	; (8000b7c <fsm_manual_run+0x250>)
+ 8000aaa:	681b      	ldr	r3, [r3, #0]
+ 8000aac:	f1c3 0301 	rsb	r3, r3, #1
+ 8000ab0:	4a32      	ldr	r2, [pc, #200]	; (8000b7c <fsm_manual_run+0x250>)
+ 8000ab2:	6013      	str	r3, [r2, #0]
+			if(isButtonPressed(0) == 1){
+ 8000ab4:	2000      	movs	r0, #0
+ 8000ab6:	f7ff fb49 	bl	800014c <isButtonPressed>
+ 8000aba:	4603      	mov	r3, r0
+ 8000abc:	2b01      	cmp	r3, #1
+ 8000abe:	d126      	bne.n	8000b0e <fsm_manual_run+0x1e2>
+				status = RED_GREEN;
+ 8000ac0:	4b2c      	ldr	r3, [pc, #176]	; (8000b74 <fsm_manual_run+0x248>)
+ 8000ac2:	2201      	movs	r2, #1
+ 8000ac4:	601a      	str	r2, [r3, #0]
+				GreenVal = RedVal - YellowVal;
+ 8000ac6:	4b32      	ldr	r3, [pc, #200]	; (8000b90 <fsm_manual_run+0x264>)
+ 8000ac8:	681a      	ldr	r2, [r3, #0]
+ 8000aca:	4b2d      	ldr	r3, [pc, #180]	; (8000b80 <fsm_manual_run+0x254>)
+ 8000acc:	681b      	ldr	r3, [r3, #0]
+ 8000ace:	1ad3      	subs	r3, r2, r3
+ 8000ad0:	4a30      	ldr	r2, [pc, #192]	; (8000b94 <fsm_manual_run+0x268>)
+ 8000ad2:	6013      	str	r3, [r2, #0]
+				timerLed7Seg1 = RedVal;
+ 8000ad4:	4b2e      	ldr	r3, [pc, #184]	; (8000b90 <fsm_manual_run+0x264>)
+ 8000ad6:	681b      	ldr	r3, [r3, #0]
+ 8000ad8:	4a2a      	ldr	r2, [pc, #168]	; (8000b84 <fsm_manual_run+0x258>)
+ 8000ada:	6013      	str	r3, [r2, #0]
+				timerLed7Seg2 = GreenVal;
+ 8000adc:	4b2d      	ldr	r3, [pc, #180]	; (8000b94 <fsm_manual_run+0x268>)
+ 8000ade:	681b      	ldr	r3, [r3, #0]
+ 8000ae0:	4a29      	ldr	r2, [pc, #164]	; (8000b88 <fsm_manual_run+0x25c>)
+ 8000ae2:	6013      	str	r3, [r2, #0]
+				UpdateLeg7Seg();
+ 8000ae4:	f000 f85e 	bl	8000ba4 <UpdateLeg7Seg>
+				setTimer1(GreenVal*100);
+ 8000ae8:	4b2a      	ldr	r3, [pc, #168]	; (8000b94 <fsm_manual_run+0x268>)
+ 8000aea:	681b      	ldr	r3, [r3, #0]
+ 8000aec:	2264      	movs	r2, #100	; 0x64
+ 8000aee:	fb02 f303 	mul.w	r3, r2, r3
+ 8000af2:	4618      	mov	r0, r3
+ 8000af4:	f000 f9f2 	bl	8000edc <setTimer1>
+				setTimer2(100);
+ 8000af8:	2064      	movs	r0, #100	; 0x64
+ 8000afa:	f000 fa03 	bl	8000f04 <setTimer2>
+				setTimer4(1);
+ 8000afe:	2001      	movs	r0, #1
+ 8000b00:	f000 fa28 	bl	8000f54 <setTimer4>
+				led7Seg_index = 0;
+ 8000b04:	4b25      	ldr	r3, [pc, #148]	; (8000b9c <fsm_manual_run+0x270>)
+ 8000b06:	2200      	movs	r2, #0
+ 8000b08:	601a      	str	r2, [r3, #0]
+				clearSeg();
+ 8000b0a:	f7ff fbcf 	bl	80002ac <clearSeg>
+			if(isButtonPressed(1) == 1){
+ 8000b0e:	2001      	movs	r0, #1
+ 8000b10:	f7ff fb1c 	bl	800014c <isButtonPressed>
+ 8000b14:	4603      	mov	r3, r0
+ 8000b16:	2b01      	cmp	r3, #1
+ 8000b18:	d112      	bne.n	8000b40 <fsm_manual_run+0x214>
+				GreenCurr++;
+ 8000b1a:	4b21      	ldr	r3, [pc, #132]	; (8000ba0 <fsm_manual_run+0x274>)
+ 8000b1c:	681b      	ldr	r3, [r3, #0]
+ 8000b1e:	3301      	adds	r3, #1
+ 8000b20:	4a1f      	ldr	r2, [pc, #124]	; (8000ba0 <fsm_manual_run+0x274>)
+ 8000b22:	6013      	str	r3, [r2, #0]
+				timerLed7Seg1++;
+ 8000b24:	4b17      	ldr	r3, [pc, #92]	; (8000b84 <fsm_manual_run+0x258>)
+ 8000b26:	681b      	ldr	r3, [r3, #0]
+ 8000b28:	3301      	adds	r3, #1
+ 8000b2a:	4a16      	ldr	r2, [pc, #88]	; (8000b84 <fsm_manual_run+0x258>)
+ 8000b2c:	6013      	str	r3, [r2, #0]
+				if(YellowCurr >= RedVal){
+ 8000b2e:	4b1a      	ldr	r3, [pc, #104]	; (8000b98 <fsm_manual_run+0x26c>)
+ 8000b30:	681a      	ldr	r2, [r3, #0]
+ 8000b32:	4b17      	ldr	r3, [pc, #92]	; (8000b90 <fsm_manual_run+0x264>)
+ 8000b34:	681b      	ldr	r3, [r3, #0]
+ 8000b36:	429a      	cmp	r2, r3
+ 8000b38:	db02      	blt.n	8000b40 <fsm_manual_run+0x214>
+					YellowCurr = 1;
+ 8000b3a:	4b17      	ldr	r3, [pc, #92]	; (8000b98 <fsm_manual_run+0x26c>)
+ 8000b3c:	2201      	movs	r2, #1
+ 8000b3e:	601a      	str	r2, [r3, #0]
+			if(isButtonPressed(2) == 1){
+ 8000b40:	2002      	movs	r0, #2
+ 8000b42:	f7ff fb03 	bl	800014c <isButtonPressed>
+ 8000b46:	4603      	mov	r3, r0
+ 8000b48:	2b01      	cmp	r3, #1
+ 8000b4a:	d10f      	bne.n	8000b6c <fsm_manual_run+0x240>
 				GreenVal = GreenCurr;
- 8000b3a:	4b19      	ldr	r3, [pc, #100]	; (8000ba0 <fsm_manual_run+0x274>)
- 8000b3c:	681b      	ldr	r3, [r3, #0]
- 8000b3e:	4a15      	ldr	r2, [pc, #84]	; (8000b94 <fsm_manual_run+0x268>)
- 8000b40:	6013      	str	r3, [r2, #0]
+ 8000b4c:	4b14      	ldr	r3, [pc, #80]	; (8000ba0 <fsm_manual_run+0x274>)
+ 8000b4e:	681b      	ldr	r3, [r3, #0]
+ 8000b50:	4a10      	ldr	r2, [pc, #64]	; (8000b94 <fsm_manual_run+0x268>)
+ 8000b52:	6013      	str	r3, [r2, #0]
 				YellowVal = RedVal - GreenVal;
- 8000b42:	4b13      	ldr	r3, [pc, #76]	; (8000b90 <fsm_manual_run+0x264>)
- 8000b44:	681a      	ldr	r2, [r3, #0]
- 8000b46:	4b13      	ldr	r3, [pc, #76]	; (8000b94 <fsm_manual_run+0x268>)
- 8000b48:	681b      	ldr	r3, [r3, #0]
- 8000b4a:	1ad3      	subs	r3, r2, r3
- 8000b4c:	4a0c      	ldr	r2, [pc, #48]	; (8000b80 <fsm_manual_run+0x254>)
- 8000b4e:	6013      	str	r3, [r2, #0]
-			}
+ 8000b54:	4b0e      	ldr	r3, [pc, #56]	; (8000b90 <fsm_manual_run+0x264>)
+ 8000b56:	681a      	ldr	r2, [r3, #0]
+ 8000b58:	4b0e      	ldr	r3, [pc, #56]	; (8000b94 <fsm_manual_run+0x268>)
+ 8000b5a:	681b      	ldr	r3, [r3, #0]
+ 8000b5c:	1ad3      	subs	r3, r2, r3
+ 8000b5e:	4a08      	ldr	r2, [pc, #32]	; (8000b80 <fsm_manual_run+0x254>)
+ 8000b60:	6013      	str	r3, [r2, #0]
 			break;
- 8000b50:	e003      	b.n	8000b5a <fsm_manual_run+0x22e>
+ 8000b62:	e003      	b.n	8000b6c <fsm_manual_run+0x240>
 			break;
- 8000b52:	bf00      	nop
- 8000b54:	e002      	b.n	8000b5c <fsm_manual_run+0x230>
+ 8000b64:	bf00      	nop
+ 8000b66:	e002      	b.n	8000b6e <fsm_manual_run+0x242>
 			break;
- 8000b56:	bf00      	nop
- 8000b58:	e000      	b.n	8000b5c <fsm_manual_run+0x230>
+ 8000b68:	bf00      	nop
+ 8000b6a:	e000      	b.n	8000b6e <fsm_manual_run+0x242>
 			break;
- 8000b5a:	bf00      	nop
-	}
-	if(isButtonPressed(2) == 1){
- 8000b5c:	2002      	movs	r0, #2
- 8000b5e:	f7ff faf5 	bl	800014c <isButtonPressed>
- 8000b62:	4603      	mov	r3, r0
- 8000b64:	2b01      	cmp	r3, #1
- 8000b66:	d103      	bne.n	8000b70 <fsm_manual_run+0x244>
-		timerLed7Seg1 = RedVal;
- 8000b68:	4b09      	ldr	r3, [pc, #36]	; (8000b90 <fsm_manual_run+0x264>)
- 8000b6a:	681b      	ldr	r3, [r3, #0]
- 8000b6c:	4a05      	ldr	r2, [pc, #20]	; (8000b84 <fsm_manual_run+0x258>)
- 8000b6e:	6013      	str	r3, [r2, #0]
-	}
+ 8000b6c:	bf00      	nop
 }
- 8000b70:	bf00      	nop
- 8000b72:	bd80      	pop	{r7, pc}
+ 8000b6e:	bf00      	nop
+ 8000b70:	bd80      	pop	{r7, pc}
+ 8000b72:	bf00      	nop
  8000b74:	20000084 	.word	0x20000084
  8000b78:	200000d8 	.word	0x200000d8
  8000b7c:	200000b0 	.word	0x200000b0
@@ -1662,19 +1637,19 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
- 8000c2c:	f000 f840 	bl	8000cb0 <SystemClock_Config>
+ 8000c2c:	f000 f83e 	bl	8000cac <SystemClock_Config>
   /* USER CODE BEGIN SysInit */
 
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
- 8000c30:	f000 f8c6 	bl	8000dc0 <MX_GPIO_Init>
+ 8000c30:	f000 f8c4 	bl	8000dbc <MX_GPIO_Init>
   MX_TIM2_Init();
- 8000c34:	f000 f878 	bl	8000d28 <MX_TIM2_Init>
+ 8000c34:	f000 f876 	bl	8000d24 <MX_TIM2_Init>
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
- 8000c38:	4813      	ldr	r0, [pc, #76]	; (8000c88 <main+0x64>)
+ 8000c38:	4812      	ldr	r0, [pc, #72]	; (8000c84 <main+0x60>)
  8000c3a:	f001 fb0b 	bl	8002254 <HAL_TIM_Base_Start_IT>
   /* USER CODE END 2 */
 
@@ -1689,419 +1664,420 @@ int main(void)
 //  timer3_flag = 1;
 //  timer4_flag = 1;
   timerLed7Seg1 = RedVal;
- 8000c4a:	4b10      	ldr	r3, [pc, #64]	; (8000c8c <main+0x68>)
+ 8000c4a:	4b0f      	ldr	r3, [pc, #60]	; (8000c88 <main+0x64>)
  8000c4c:	681b      	ldr	r3, [r3, #0]
- 8000c4e:	4a10      	ldr	r2, [pc, #64]	; (8000c90 <main+0x6c>)
+ 8000c4e:	4a0f      	ldr	r2, [pc, #60]	; (8000c8c <main+0x68>)
  8000c50:	6013      	str	r3, [r2, #0]
   timerLed7Seg2 = GreenVal;
- 8000c52:	4b10      	ldr	r3, [pc, #64]	; (8000c94 <main+0x70>)
+ 8000c52:	4b0f      	ldr	r3, [pc, #60]	; (8000c90 <main+0x6c>)
  8000c54:	681b      	ldr	r3, [r3, #0]
- 8000c56:	4a10      	ldr	r2, [pc, #64]	; (8000c98 <main+0x74>)
+ 8000c56:	4a0f      	ldr	r2, [pc, #60]	; (8000c94 <main+0x70>)
  8000c58:	6013      	str	r3, [r2, #0]
   RedCurr = RedVal;
- 8000c5a:	4b0c      	ldr	r3, [pc, #48]	; (8000c8c <main+0x68>)
+ 8000c5a:	4b0b      	ldr	r3, [pc, #44]	; (8000c88 <main+0x64>)
  8000c5c:	681b      	ldr	r3, [r3, #0]
- 8000c5e:	4a0f      	ldr	r2, [pc, #60]	; (8000c9c <main+0x78>)
+ 8000c5e:	4a0e      	ldr	r2, [pc, #56]	; (8000c98 <main+0x74>)
  8000c60:	6013      	str	r3, [r2, #0]
   GreenCurr = GreenVal;
- 8000c62:	4b0c      	ldr	r3, [pc, #48]	; (8000c94 <main+0x70>)
+ 8000c62:	4b0b      	ldr	r3, [pc, #44]	; (8000c90 <main+0x6c>)
  8000c64:	681b      	ldr	r3, [r3, #0]
- 8000c66:	4a0e      	ldr	r2, [pc, #56]	; (8000ca0 <main+0x7c>)
+ 8000c66:	4a0d      	ldr	r2, [pc, #52]	; (8000c9c <main+0x78>)
  8000c68:	6013      	str	r3, [r2, #0]
   YellowCurr = YellowVal;
- 8000c6a:	4b0e      	ldr	r3, [pc, #56]	; (8000ca4 <main+0x80>)
+ 8000c6a:	4b0d      	ldr	r3, [pc, #52]	; (8000ca0 <main+0x7c>)
  8000c6c:	681b      	ldr	r3, [r3, #0]
- 8000c6e:	4a0e      	ldr	r2, [pc, #56]	; (8000ca8 <main+0x84>)
+ 8000c6e:	4a0d      	ldr	r2, [pc, #52]	; (8000ca4 <main+0x80>)
  8000c70:	6013      	str	r3, [r2, #0]
   status = INIT;
- 8000c72:	4b0e      	ldr	r3, [pc, #56]	; (8000cac <main+0x88>)
+ 8000c72:	4b0d      	ldr	r3, [pc, #52]	; (8000ca8 <main+0x84>)
  8000c74:	2200      	movs	r2, #0
  8000c76:	601a      	str	r2, [r3, #0]
 //  clearSeg();
   while (1)
   {
-	  timerProcess();
- 8000c78:	f000 faa0 	bl	80011bc <timerProcess>
-	  fsm_automatic_run();
- 8000c7c:	f7ff fd1a 	bl	80006b4 <fsm_automatic_run>
-	  fsm_manual_run();
- 8000c80:	f7ff fe54 	bl	800092c <fsm_manual_run>
-  {
- 8000c84:	e7f8      	b.n	8000c78 <main+0x54>
- 8000c86:	bf00      	nop
- 8000c88:	200000e4 	.word	0x200000e4
- 8000c8c:	20000044 	.word	0x20000044
- 8000c90:	200000a8 	.word	0x200000a8
- 8000c94:	20000048 	.word	0x20000048
- 8000c98:	200000ac 	.word	0x200000ac
- 8000c9c:	2000009c 	.word	0x2000009c
- 8000ca0:	200000a0 	.word	0x200000a0
- 8000ca4:	2000004c 	.word	0x2000004c
- 8000ca8:	200000a4 	.word	0x200000a4
- 8000cac:	20000084 	.word	0x20000084
 
-08000cb0 <SystemClock_Config>:
+	  fsm_automatic_run();
+ 8000c78:	f7ff fd1c 	bl	80006b4 <fsm_automatic_run>
+	  fsm_manual_run();
+ 8000c7c:	f7ff fe56 	bl	800092c <fsm_manual_run>
+	  fsm_automatic_run();
+ 8000c80:	e7fa      	b.n	8000c78 <main+0x54>
+ 8000c82:	bf00      	nop
+ 8000c84:	200000e4 	.word	0x200000e4
+ 8000c88:	20000044 	.word	0x20000044
+ 8000c8c:	200000a8 	.word	0x200000a8
+ 8000c90:	20000048 	.word	0x20000048
+ 8000c94:	200000ac 	.word	0x200000ac
+ 8000c98:	2000009c 	.word	0x2000009c
+ 8000c9c:	200000a0 	.word	0x200000a0
+ 8000ca0:	2000004c 	.word	0x2000004c
+ 8000ca4:	200000a4 	.word	0x200000a4
+ 8000ca8:	20000084 	.word	0x20000084
+
+08000cac <SystemClock_Config>:
 /**
   * @brief System Clock Configuration
   * @retval None
   */
 void SystemClock_Config(void)
 {
- 8000cb0:	b580      	push	{r7, lr}
- 8000cb2:	b090      	sub	sp, #64	; 0x40
- 8000cb4:	af00      	add	r7, sp, #0
+ 8000cac:	b580      	push	{r7, lr}
+ 8000cae:	b090      	sub	sp, #64	; 0x40
+ 8000cb0:	af00      	add	r7, sp, #0
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
- 8000cb6:	f107 0318 	add.w	r3, r7, #24
- 8000cba:	2228      	movs	r2, #40	; 0x28
- 8000cbc:	2100      	movs	r1, #0
- 8000cbe:	4618      	mov	r0, r3
- 8000cc0:	f001 fe84 	bl	80029cc <memset>
+ 8000cb2:	f107 0318 	add.w	r3, r7, #24
+ 8000cb6:	2228      	movs	r2, #40	; 0x28
+ 8000cb8:	2100      	movs	r1, #0
+ 8000cba:	4618      	mov	r0, r3
+ 8000cbc:	f001 fe86 	bl	80029cc <memset>
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
- 8000cc4:	1d3b      	adds	r3, r7, #4
- 8000cc6:	2200      	movs	r2, #0
- 8000cc8:	601a      	str	r2, [r3, #0]
- 8000cca:	605a      	str	r2, [r3, #4]
- 8000ccc:	609a      	str	r2, [r3, #8]
- 8000cce:	60da      	str	r2, [r3, #12]
- 8000cd0:	611a      	str	r2, [r3, #16]
+ 8000cc0:	1d3b      	adds	r3, r7, #4
+ 8000cc2:	2200      	movs	r2, #0
+ 8000cc4:	601a      	str	r2, [r3, #0]
+ 8000cc6:	605a      	str	r2, [r3, #4]
+ 8000cc8:	609a      	str	r2, [r3, #8]
+ 8000cca:	60da      	str	r2, [r3, #12]
+ 8000ccc:	611a      	str	r2, [r3, #16]
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
- 8000cd2:	2302      	movs	r3, #2
- 8000cd4:	61bb      	str	r3, [r7, #24]
+ 8000cce:	2302      	movs	r3, #2
+ 8000cd0:	61bb      	str	r3, [r7, #24]
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
- 8000cd6:	2301      	movs	r3, #1
- 8000cd8:	62bb      	str	r3, [r7, #40]	; 0x28
+ 8000cd2:	2301      	movs	r3, #1
+ 8000cd4:	62bb      	str	r3, [r7, #40]	; 0x28
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
- 8000cda:	2310      	movs	r3, #16
- 8000cdc:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 8000cd6:	2310      	movs	r3, #16
+ 8000cd8:	62fb      	str	r3, [r7, #44]	; 0x2c
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
- 8000cde:	2300      	movs	r3, #0
- 8000ce0:	637b      	str	r3, [r7, #52]	; 0x34
+ 8000cda:	2300      	movs	r3, #0
+ 8000cdc:	637b      	str	r3, [r7, #52]	; 0x34
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 8000ce2:	f107 0318 	add.w	r3, r7, #24
- 8000ce6:	4618      	mov	r0, r3
- 8000ce8:	f000 fe88 	bl	80019fc <HAL_RCC_OscConfig>
- 8000cec:	4603      	mov	r3, r0
- 8000cee:	2b00      	cmp	r3, #0
- 8000cf0:	d001      	beq.n	8000cf6 <SystemClock_Config+0x46>
+ 8000cde:	f107 0318 	add.w	r3, r7, #24
+ 8000ce2:	4618      	mov	r0, r3
+ 8000ce4:	f000 fe8a 	bl	80019fc <HAL_RCC_OscConfig>
+ 8000ce8:	4603      	mov	r3, r0
+ 8000cea:	2b00      	cmp	r3, #0
+ 8000cec:	d001      	beq.n	8000cf2 <SystemClock_Config+0x46>
   {
     Error_Handler();
- 8000cf2:	f000 f8ed 	bl	8000ed0 <Error_Handler>
+ 8000cee:	f000 f8ef 	bl	8000ed0 <Error_Handler>
   }
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
- 8000cf6:	230f      	movs	r3, #15
- 8000cf8:	607b      	str	r3, [r7, #4]
+ 8000cf2:	230f      	movs	r3, #15
+ 8000cf4:	607b      	str	r3, [r7, #4]
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
- 8000cfa:	2300      	movs	r3, #0
- 8000cfc:	60bb      	str	r3, [r7, #8]
+ 8000cf6:	2300      	movs	r3, #0
+ 8000cf8:	60bb      	str	r3, [r7, #8]
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
- 8000cfe:	2300      	movs	r3, #0
- 8000d00:	60fb      	str	r3, [r7, #12]
+ 8000cfa:	2300      	movs	r3, #0
+ 8000cfc:	60fb      	str	r3, [r7, #12]
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
- 8000d02:	2300      	movs	r3, #0
- 8000d04:	613b      	str	r3, [r7, #16]
+ 8000cfe:	2300      	movs	r3, #0
+ 8000d00:	613b      	str	r3, [r7, #16]
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 8000d06:	2300      	movs	r3, #0
- 8000d08:	617b      	str	r3, [r7, #20]
+ 8000d02:	2300      	movs	r3, #0
+ 8000d04:	617b      	str	r3, [r7, #20]
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
- 8000d0a:	1d3b      	adds	r3, r7, #4
- 8000d0c:	2100      	movs	r1, #0
- 8000d0e:	4618      	mov	r0, r3
- 8000d10:	f001 f8f4 	bl	8001efc <HAL_RCC_ClockConfig>
- 8000d14:	4603      	mov	r3, r0
- 8000d16:	2b00      	cmp	r3, #0
- 8000d18:	d001      	beq.n	8000d1e <SystemClock_Config+0x6e>
+ 8000d06:	1d3b      	adds	r3, r7, #4
+ 8000d08:	2100      	movs	r1, #0
+ 8000d0a:	4618      	mov	r0, r3
+ 8000d0c:	f001 f8f6 	bl	8001efc <HAL_RCC_ClockConfig>
+ 8000d10:	4603      	mov	r3, r0
+ 8000d12:	2b00      	cmp	r3, #0
+ 8000d14:	d001      	beq.n	8000d1a <SystemClock_Config+0x6e>
   {
     Error_Handler();
- 8000d1a:	f000 f8d9 	bl	8000ed0 <Error_Handler>
+ 8000d16:	f000 f8db 	bl	8000ed0 <Error_Handler>
   }
 }
- 8000d1e:	bf00      	nop
- 8000d20:	3740      	adds	r7, #64	; 0x40
- 8000d22:	46bd      	mov	sp, r7
- 8000d24:	bd80      	pop	{r7, pc}
+ 8000d1a:	bf00      	nop
+ 8000d1c:	3740      	adds	r7, #64	; 0x40
+ 8000d1e:	46bd      	mov	sp, r7
+ 8000d20:	bd80      	pop	{r7, pc}
 	...
 
-08000d28 <MX_TIM2_Init>:
+08000d24 <MX_TIM2_Init>:
   * @brief TIM2 Initialization Function
   * @param None
   * @retval None
   */
 static void MX_TIM2_Init(void)
 {
- 8000d28:	b580      	push	{r7, lr}
- 8000d2a:	b086      	sub	sp, #24
- 8000d2c:	af00      	add	r7, sp, #0
+ 8000d24:	b580      	push	{r7, lr}
+ 8000d26:	b086      	sub	sp, #24
+ 8000d28:	af00      	add	r7, sp, #0
 
   /* USER CODE BEGIN TIM2_Init 0 */
 
   /* USER CODE END TIM2_Init 0 */
 
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
- 8000d2e:	f107 0308 	add.w	r3, r7, #8
- 8000d32:	2200      	movs	r2, #0
- 8000d34:	601a      	str	r2, [r3, #0]
- 8000d36:	605a      	str	r2, [r3, #4]
- 8000d38:	609a      	str	r2, [r3, #8]
- 8000d3a:	60da      	str	r2, [r3, #12]
+ 8000d2a:	f107 0308 	add.w	r3, r7, #8
+ 8000d2e:	2200      	movs	r2, #0
+ 8000d30:	601a      	str	r2, [r3, #0]
+ 8000d32:	605a      	str	r2, [r3, #4]
+ 8000d34:	609a      	str	r2, [r3, #8]
+ 8000d36:	60da      	str	r2, [r3, #12]
   TIM_MasterConfigTypeDef sMasterConfig = {0};
- 8000d3c:	463b      	mov	r3, r7
- 8000d3e:	2200      	movs	r2, #0
- 8000d40:	601a      	str	r2, [r3, #0]
- 8000d42:	605a      	str	r2, [r3, #4]
+ 8000d38:	463b      	mov	r3, r7
+ 8000d3a:	2200      	movs	r2, #0
+ 8000d3c:	601a      	str	r2, [r3, #0]
+ 8000d3e:	605a      	str	r2, [r3, #4]
 
   /* USER CODE BEGIN TIM2_Init 1 */
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
- 8000d44:	4b1d      	ldr	r3, [pc, #116]	; (8000dbc <MX_TIM2_Init+0x94>)
- 8000d46:	f04f 4280 	mov.w	r2, #1073741824	; 0x40000000
- 8000d4a:	601a      	str	r2, [r3, #0]
+ 8000d40:	4b1d      	ldr	r3, [pc, #116]	; (8000db8 <MX_TIM2_Init+0x94>)
+ 8000d42:	f04f 4280 	mov.w	r2, #1073741824	; 0x40000000
+ 8000d46:	601a      	str	r2, [r3, #0]
   htim2.Init.Prescaler = 7999;
- 8000d4c:	4b1b      	ldr	r3, [pc, #108]	; (8000dbc <MX_TIM2_Init+0x94>)
- 8000d4e:	f641 723f 	movw	r2, #7999	; 0x1f3f
- 8000d52:	605a      	str	r2, [r3, #4]
+ 8000d48:	4b1b      	ldr	r3, [pc, #108]	; (8000db8 <MX_TIM2_Init+0x94>)
+ 8000d4a:	f641 723f 	movw	r2, #7999	; 0x1f3f
+ 8000d4e:	605a      	str	r2, [r3, #4]
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
- 8000d54:	4b19      	ldr	r3, [pc, #100]	; (8000dbc <MX_TIM2_Init+0x94>)
- 8000d56:	2200      	movs	r2, #0
- 8000d58:	609a      	str	r2, [r3, #8]
+ 8000d50:	4b19      	ldr	r3, [pc, #100]	; (8000db8 <MX_TIM2_Init+0x94>)
+ 8000d52:	2200      	movs	r2, #0
+ 8000d54:	609a      	str	r2, [r3, #8]
   htim2.Init.Period = 9;
- 8000d5a:	4b18      	ldr	r3, [pc, #96]	; (8000dbc <MX_TIM2_Init+0x94>)
- 8000d5c:	2209      	movs	r2, #9
- 8000d5e:	60da      	str	r2, [r3, #12]
+ 8000d56:	4b18      	ldr	r3, [pc, #96]	; (8000db8 <MX_TIM2_Init+0x94>)
+ 8000d58:	2209      	movs	r2, #9
+ 8000d5a:	60da      	str	r2, [r3, #12]
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
- 8000d60:	4b16      	ldr	r3, [pc, #88]	; (8000dbc <MX_TIM2_Init+0x94>)
- 8000d62:	2200      	movs	r2, #0
- 8000d64:	611a      	str	r2, [r3, #16]
+ 8000d5c:	4b16      	ldr	r3, [pc, #88]	; (8000db8 <MX_TIM2_Init+0x94>)
+ 8000d5e:	2200      	movs	r2, #0
+ 8000d60:	611a      	str	r2, [r3, #16]
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
- 8000d66:	4b15      	ldr	r3, [pc, #84]	; (8000dbc <MX_TIM2_Init+0x94>)
- 8000d68:	2200      	movs	r2, #0
- 8000d6a:	619a      	str	r2, [r3, #24]
+ 8000d62:	4b15      	ldr	r3, [pc, #84]	; (8000db8 <MX_TIM2_Init+0x94>)
+ 8000d64:	2200      	movs	r2, #0
+ 8000d66:	619a      	str	r2, [r3, #24]
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
- 8000d6c:	4813      	ldr	r0, [pc, #76]	; (8000dbc <MX_TIM2_Init+0x94>)
- 8000d6e:	f001 fa21 	bl	80021b4 <HAL_TIM_Base_Init>
- 8000d72:	4603      	mov	r3, r0
- 8000d74:	2b00      	cmp	r3, #0
- 8000d76:	d001      	beq.n	8000d7c <MX_TIM2_Init+0x54>
+ 8000d68:	4813      	ldr	r0, [pc, #76]	; (8000db8 <MX_TIM2_Init+0x94>)
+ 8000d6a:	f001 fa23 	bl	80021b4 <HAL_TIM_Base_Init>
+ 8000d6e:	4603      	mov	r3, r0
+ 8000d70:	2b00      	cmp	r3, #0
+ 8000d72:	d001      	beq.n	8000d78 <MX_TIM2_Init+0x54>
   {
     Error_Handler();
- 8000d78:	f000 f8aa 	bl	8000ed0 <Error_Handler>
+ 8000d74:	f000 f8ac 	bl	8000ed0 <Error_Handler>
   }
   sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
- 8000d7c:	f44f 5380 	mov.w	r3, #4096	; 0x1000
- 8000d80:	60bb      	str	r3, [r7, #8]
+ 8000d78:	f44f 5380 	mov.w	r3, #4096	; 0x1000
+ 8000d7c:	60bb      	str	r3, [r7, #8]
   if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
- 8000d82:	f107 0308 	add.w	r3, r7, #8
- 8000d86:	4619      	mov	r1, r3
- 8000d88:	480c      	ldr	r0, [pc, #48]	; (8000dbc <MX_TIM2_Init+0x94>)
- 8000d8a:	f001 fbb7 	bl	80024fc <HAL_TIM_ConfigClockSource>
- 8000d8e:	4603      	mov	r3, r0
- 8000d90:	2b00      	cmp	r3, #0
- 8000d92:	d001      	beq.n	8000d98 <MX_TIM2_Init+0x70>
+ 8000d7e:	f107 0308 	add.w	r3, r7, #8
+ 8000d82:	4619      	mov	r1, r3
+ 8000d84:	480c      	ldr	r0, [pc, #48]	; (8000db8 <MX_TIM2_Init+0x94>)
+ 8000d86:	f001 fbb9 	bl	80024fc <HAL_TIM_ConfigClockSource>
+ 8000d8a:	4603      	mov	r3, r0
+ 8000d8c:	2b00      	cmp	r3, #0
+ 8000d8e:	d001      	beq.n	8000d94 <MX_TIM2_Init+0x70>
   {
     Error_Handler();
- 8000d94:	f000 f89c 	bl	8000ed0 <Error_Handler>
+ 8000d90:	f000 f89e 	bl	8000ed0 <Error_Handler>
   }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
- 8000d98:	2300      	movs	r3, #0
- 8000d9a:	603b      	str	r3, [r7, #0]
+ 8000d94:	2300      	movs	r3, #0
+ 8000d96:	603b      	str	r3, [r7, #0]
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
- 8000d9c:	2300      	movs	r3, #0
- 8000d9e:	607b      	str	r3, [r7, #4]
+ 8000d98:	2300      	movs	r3, #0
+ 8000d9a:	607b      	str	r3, [r7, #4]
   if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
- 8000da0:	463b      	mov	r3, r7
- 8000da2:	4619      	mov	r1, r3
- 8000da4:	4805      	ldr	r0, [pc, #20]	; (8000dbc <MX_TIM2_Init+0x94>)
- 8000da6:	f001 fd83 	bl	80028b0 <HAL_TIMEx_MasterConfigSynchronization>
- 8000daa:	4603      	mov	r3, r0
- 8000dac:	2b00      	cmp	r3, #0
- 8000dae:	d001      	beq.n	8000db4 <MX_TIM2_Init+0x8c>
+ 8000d9c:	463b      	mov	r3, r7
+ 8000d9e:	4619      	mov	r1, r3
+ 8000da0:	4805      	ldr	r0, [pc, #20]	; (8000db8 <MX_TIM2_Init+0x94>)
+ 8000da2:	f001 fd85 	bl	80028b0 <HAL_TIMEx_MasterConfigSynchronization>
+ 8000da6:	4603      	mov	r3, r0
+ 8000da8:	2b00      	cmp	r3, #0
+ 8000daa:	d001      	beq.n	8000db0 <MX_TIM2_Init+0x8c>
   {
     Error_Handler();
- 8000db0:	f000 f88e 	bl	8000ed0 <Error_Handler>
+ 8000dac:	f000 f890 	bl	8000ed0 <Error_Handler>
   }
   /* USER CODE BEGIN TIM2_Init 2 */
 
   /* USER CODE END TIM2_Init 2 */
 
 }
- 8000db4:	bf00      	nop
- 8000db6:	3718      	adds	r7, #24
- 8000db8:	46bd      	mov	sp, r7
- 8000dba:	bd80      	pop	{r7, pc}
- 8000dbc:	200000e4 	.word	0x200000e4
+ 8000db0:	bf00      	nop
+ 8000db2:	3718      	adds	r7, #24
+ 8000db4:	46bd      	mov	sp, r7
+ 8000db6:	bd80      	pop	{r7, pc}
+ 8000db8:	200000e4 	.word	0x200000e4
 
-08000dc0 <MX_GPIO_Init>:
+08000dbc <MX_GPIO_Init>:
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
   */
 static void MX_GPIO_Init(void)
 {
- 8000dc0:	b580      	push	{r7, lr}
- 8000dc2:	b088      	sub	sp, #32
- 8000dc4:	af00      	add	r7, sp, #0
+ 8000dbc:	b580      	push	{r7, lr}
+ 8000dbe:	b088      	sub	sp, #32
+ 8000dc0:	af00      	add	r7, sp, #0
   GPIO_InitTypeDef GPIO_InitStruct = {0};
- 8000dc6:	f107 0310 	add.w	r3, r7, #16
- 8000dca:	2200      	movs	r2, #0
- 8000dcc:	601a      	str	r2, [r3, #0]
- 8000dce:	605a      	str	r2, [r3, #4]
- 8000dd0:	609a      	str	r2, [r3, #8]
- 8000dd2:	60da      	str	r2, [r3, #12]
+ 8000dc2:	f107 0310 	add.w	r3, r7, #16
+ 8000dc6:	2200      	movs	r2, #0
+ 8000dc8:	601a      	str	r2, [r3, #0]
+ 8000dca:	605a      	str	r2, [r3, #4]
+ 8000dcc:	609a      	str	r2, [r3, #8]
+ 8000dce:	60da      	str	r2, [r3, #12]
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
- 8000dd4:	4b34      	ldr	r3, [pc, #208]	; (8000ea8 <MX_GPIO_Init+0xe8>)
- 8000dd6:	699b      	ldr	r3, [r3, #24]
- 8000dd8:	4a33      	ldr	r2, [pc, #204]	; (8000ea8 <MX_GPIO_Init+0xe8>)
- 8000dda:	f043 0310 	orr.w	r3, r3, #16
- 8000dde:	6193      	str	r3, [r2, #24]
- 8000de0:	4b31      	ldr	r3, [pc, #196]	; (8000ea8 <MX_GPIO_Init+0xe8>)
- 8000de2:	699b      	ldr	r3, [r3, #24]
- 8000de4:	f003 0310 	and.w	r3, r3, #16
- 8000de8:	60fb      	str	r3, [r7, #12]
- 8000dea:	68fb      	ldr	r3, [r7, #12]
+ 8000dd0:	4b34      	ldr	r3, [pc, #208]	; (8000ea4 <MX_GPIO_Init+0xe8>)
+ 8000dd2:	699b      	ldr	r3, [r3, #24]
+ 8000dd4:	4a33      	ldr	r2, [pc, #204]	; (8000ea4 <MX_GPIO_Init+0xe8>)
+ 8000dd6:	f043 0310 	orr.w	r3, r3, #16
+ 8000dda:	6193      	str	r3, [r2, #24]
+ 8000ddc:	4b31      	ldr	r3, [pc, #196]	; (8000ea4 <MX_GPIO_Init+0xe8>)
+ 8000dde:	699b      	ldr	r3, [r3, #24]
+ 8000de0:	f003 0310 	and.w	r3, r3, #16
+ 8000de4:	60fb      	str	r3, [r7, #12]
+ 8000de6:	68fb      	ldr	r3, [r7, #12]
   __HAL_RCC_GPIOA_CLK_ENABLE();
- 8000dec:	4b2e      	ldr	r3, [pc, #184]	; (8000ea8 <MX_GPIO_Init+0xe8>)
- 8000dee:	699b      	ldr	r3, [r3, #24]
- 8000df0:	4a2d      	ldr	r2, [pc, #180]	; (8000ea8 <MX_GPIO_Init+0xe8>)
- 8000df2:	f043 0304 	orr.w	r3, r3, #4
- 8000df6:	6193      	str	r3, [r2, #24]
- 8000df8:	4b2b      	ldr	r3, [pc, #172]	; (8000ea8 <MX_GPIO_Init+0xe8>)
- 8000dfa:	699b      	ldr	r3, [r3, #24]
- 8000dfc:	f003 0304 	and.w	r3, r3, #4
- 8000e00:	60bb      	str	r3, [r7, #8]
- 8000e02:	68bb      	ldr	r3, [r7, #8]
+ 8000de8:	4b2e      	ldr	r3, [pc, #184]	; (8000ea4 <MX_GPIO_Init+0xe8>)
+ 8000dea:	699b      	ldr	r3, [r3, #24]
+ 8000dec:	4a2d      	ldr	r2, [pc, #180]	; (8000ea4 <MX_GPIO_Init+0xe8>)
+ 8000dee:	f043 0304 	orr.w	r3, r3, #4
+ 8000df2:	6193      	str	r3, [r2, #24]
+ 8000df4:	4b2b      	ldr	r3, [pc, #172]	; (8000ea4 <MX_GPIO_Init+0xe8>)
+ 8000df6:	699b      	ldr	r3, [r3, #24]
+ 8000df8:	f003 0304 	and.w	r3, r3, #4
+ 8000dfc:	60bb      	str	r3, [r7, #8]
+ 8000dfe:	68bb      	ldr	r3, [r7, #8]
   __HAL_RCC_GPIOB_CLK_ENABLE();
- 8000e04:	4b28      	ldr	r3, [pc, #160]	; (8000ea8 <MX_GPIO_Init+0xe8>)
- 8000e06:	699b      	ldr	r3, [r3, #24]
- 8000e08:	4a27      	ldr	r2, [pc, #156]	; (8000ea8 <MX_GPIO_Init+0xe8>)
- 8000e0a:	f043 0308 	orr.w	r3, r3, #8
- 8000e0e:	6193      	str	r3, [r2, #24]
- 8000e10:	4b25      	ldr	r3, [pc, #148]	; (8000ea8 <MX_GPIO_Init+0xe8>)
- 8000e12:	699b      	ldr	r3, [r3, #24]
- 8000e14:	f003 0308 	and.w	r3, r3, #8
- 8000e18:	607b      	str	r3, [r7, #4]
- 8000e1a:	687b      	ldr	r3, [r7, #4]
+ 8000e00:	4b28      	ldr	r3, [pc, #160]	; (8000ea4 <MX_GPIO_Init+0xe8>)
+ 8000e02:	699b      	ldr	r3, [r3, #24]
+ 8000e04:	4a27      	ldr	r2, [pc, #156]	; (8000ea4 <MX_GPIO_Init+0xe8>)
+ 8000e06:	f043 0308 	orr.w	r3, r3, #8
+ 8000e0a:	6193      	str	r3, [r2, #24]
+ 8000e0c:	4b25      	ldr	r3, [pc, #148]	; (8000ea4 <MX_GPIO_Init+0xe8>)
+ 8000e0e:	699b      	ldr	r3, [r3, #24]
+ 8000e10:	f003 0308 	and.w	r3, r3, #8
+ 8000e14:	607b      	str	r3, [r7, #4]
+ 8000e16:	687b      	ldr	r3, [r7, #4]
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, Red1_Pin|Green1_Pin|Yellow1_Pin|Red2_Pin
- 8000e1c:	2200      	movs	r2, #0
- 8000e1e:	f24f 017e 	movw	r1, #61566	; 0xf07e
- 8000e22:	4822      	ldr	r0, [pc, #136]	; (8000eac <MX_GPIO_Init+0xec>)
- 8000e24:	f000 fdd1 	bl	80019ca <HAL_GPIO_WritePin>
+ 8000e18:	2200      	movs	r2, #0
+ 8000e1a:	f24f 017e 	movw	r1, #61566	; 0xf07e
+ 8000e1e:	4822      	ldr	r0, [pc, #136]	; (8000ea8 <MX_GPIO_Init+0xec>)
+ 8000e20:	f000 fdd3 	bl	80019ca <HAL_GPIO_WritePin>
                           |Green2_Pin|Yellow2_Pin|EN0_Pin|EN1_Pin
                           |EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, a_Pin|b_Pin|c_Pin|d_Pin
- 8000e28:	2200      	movs	r2, #0
- 8000e2a:	217f      	movs	r1, #127	; 0x7f
- 8000e2c:	4820      	ldr	r0, [pc, #128]	; (8000eb0 <MX_GPIO_Init+0xf0>)
- 8000e2e:	f000 fdcc 	bl	80019ca <HAL_GPIO_WritePin>
+ 8000e24:	2200      	movs	r2, #0
+ 8000e26:	217f      	movs	r1, #127	; 0x7f
+ 8000e28:	4820      	ldr	r0, [pc, #128]	; (8000eac <MX_GPIO_Init+0xf0>)
+ 8000e2a:	f000 fdce 	bl	80019ca <HAL_GPIO_WritePin>
                           |e_Pin|f_Pin|g_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : Button1_Pin */
   GPIO_InitStruct.Pin = Button1_Pin;
- 8000e32:	f44f 5300 	mov.w	r3, #8192	; 0x2000
- 8000e36:	613b      	str	r3, [r7, #16]
+ 8000e2e:	f44f 5300 	mov.w	r3, #8192	; 0x2000
+ 8000e32:	613b      	str	r3, [r7, #16]
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
- 8000e38:	2300      	movs	r3, #0
- 8000e3a:	617b      	str	r3, [r7, #20]
+ 8000e34:	2300      	movs	r3, #0
+ 8000e36:	617b      	str	r3, [r7, #20]
   GPIO_InitStruct.Pull = GPIO_PULLUP;
- 8000e3c:	2301      	movs	r3, #1
- 8000e3e:	61bb      	str	r3, [r7, #24]
+ 8000e38:	2301      	movs	r3, #1
+ 8000e3a:	61bb      	str	r3, [r7, #24]
   HAL_GPIO_Init(Button1_GPIO_Port, &GPIO_InitStruct);
- 8000e40:	f107 0310 	add.w	r3, r7, #16
- 8000e44:	4619      	mov	r1, r3
- 8000e46:	481b      	ldr	r0, [pc, #108]	; (8000eb4 <MX_GPIO_Init+0xf4>)
- 8000e48:	f000 fc2e 	bl	80016a8 <HAL_GPIO_Init>
+ 8000e3c:	f107 0310 	add.w	r3, r7, #16
+ 8000e40:	4619      	mov	r1, r3
+ 8000e42:	481b      	ldr	r0, [pc, #108]	; (8000eb0 <MX_GPIO_Init+0xf4>)
+ 8000e44:	f000 fc30 	bl	80016a8 <HAL_GPIO_Init>
 
   /*Configure GPIO pins : Red1_Pin Green1_Pin Yellow1_Pin Red2_Pin
                            Green2_Pin Yellow2_Pin EN0_Pin EN1_Pin
                            EN2_Pin EN3_Pin */
   GPIO_InitStruct.Pin = Red1_Pin|Green1_Pin|Yellow1_Pin|Red2_Pin
- 8000e4c:	f24f 037e 	movw	r3, #61566	; 0xf07e
- 8000e50:	613b      	str	r3, [r7, #16]
+ 8000e48:	f24f 037e 	movw	r3, #61566	; 0xf07e
+ 8000e4c:	613b      	str	r3, [r7, #16]
                           |Green2_Pin|Yellow2_Pin|EN0_Pin|EN1_Pin
                           |EN2_Pin|EN3_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- 8000e52:	2301      	movs	r3, #1
- 8000e54:	617b      	str	r3, [r7, #20]
+ 8000e4e:	2301      	movs	r3, #1
+ 8000e50:	617b      	str	r3, [r7, #20]
   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 8000e56:	2300      	movs	r3, #0
- 8000e58:	61bb      	str	r3, [r7, #24]
+ 8000e52:	2300      	movs	r3, #0
+ 8000e54:	61bb      	str	r3, [r7, #24]
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- 8000e5a:	2302      	movs	r3, #2
- 8000e5c:	61fb      	str	r3, [r7, #28]
+ 8000e56:	2302      	movs	r3, #2
+ 8000e58:	61fb      	str	r3, [r7, #28]
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
- 8000e5e:	f107 0310 	add.w	r3, r7, #16
- 8000e62:	4619      	mov	r1, r3
- 8000e64:	4811      	ldr	r0, [pc, #68]	; (8000eac <MX_GPIO_Init+0xec>)
- 8000e66:	f000 fc1f 	bl	80016a8 <HAL_GPIO_Init>
+ 8000e5a:	f107 0310 	add.w	r3, r7, #16
+ 8000e5e:	4619      	mov	r1, r3
+ 8000e60:	4811      	ldr	r0, [pc, #68]	; (8000ea8 <MX_GPIO_Init+0xec>)
+ 8000e62:	f000 fc21 	bl	80016a8 <HAL_GPIO_Init>
 
   /*Configure GPIO pins : a_Pin b_Pin c_Pin d_Pin
                            e_Pin f_Pin g_Pin */
   GPIO_InitStruct.Pin = a_Pin|b_Pin|c_Pin|d_Pin
- 8000e6a:	237f      	movs	r3, #127	; 0x7f
- 8000e6c:	613b      	str	r3, [r7, #16]
+ 8000e66:	237f      	movs	r3, #127	; 0x7f
+ 8000e68:	613b      	str	r3, [r7, #16]
                           |e_Pin|f_Pin|g_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
- 8000e6e:	2301      	movs	r3, #1
- 8000e70:	617b      	str	r3, [r7, #20]
+ 8000e6a:	2301      	movs	r3, #1
+ 8000e6c:	617b      	str	r3, [r7, #20]
   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 8000e72:	2300      	movs	r3, #0
- 8000e74:	61bb      	str	r3, [r7, #24]
+ 8000e6e:	2300      	movs	r3, #0
+ 8000e70:	61bb      	str	r3, [r7, #24]
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- 8000e76:	2302      	movs	r3, #2
- 8000e78:	61fb      	str	r3, [r7, #28]
+ 8000e72:	2302      	movs	r3, #2
+ 8000e74:	61fb      	str	r3, [r7, #28]
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
- 8000e7a:	f107 0310 	add.w	r3, r7, #16
- 8000e7e:	4619      	mov	r1, r3
- 8000e80:	480b      	ldr	r0, [pc, #44]	; (8000eb0 <MX_GPIO_Init+0xf0>)
- 8000e82:	f000 fc11 	bl	80016a8 <HAL_GPIO_Init>
+ 8000e76:	f107 0310 	add.w	r3, r7, #16
+ 8000e7a:	4619      	mov	r1, r3
+ 8000e7c:	480b      	ldr	r0, [pc, #44]	; (8000eac <MX_GPIO_Init+0xf0>)
+ 8000e7e:	f000 fc13 	bl	80016a8 <HAL_GPIO_Init>
 
-  /*Configure GPIO pins : btnSetVal_Pin btnIncrease_Pin btnMode_Pin */
-  GPIO_InitStruct.Pin = btnSetVal_Pin|btnIncrease_Pin|btnMode_Pin;
- 8000e86:	f44f 4360 	mov.w	r3, #57344	; 0xe000
- 8000e8a:	613b      	str	r3, [r7, #16]
+  /*Configure GPIO pins : btnMode_Pin btnIncrease_Pin btnSetVal_Pin */
+  GPIO_InitStruct.Pin = btnMode_Pin|btnIncrease_Pin|btnSetVal_Pin;
+ 8000e82:	f44f 4360 	mov.w	r3, #57344	; 0xe000
+ 8000e86:	613b      	str	r3, [r7, #16]
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
- 8000e8c:	2300      	movs	r3, #0
- 8000e8e:	617b      	str	r3, [r7, #20]
+ 8000e88:	2300      	movs	r3, #0
+ 8000e8a:	617b      	str	r3, [r7, #20]
   GPIO_InitStruct.Pull = GPIO_PULLUP;
- 8000e90:	2301      	movs	r3, #1
- 8000e92:	61bb      	str	r3, [r7, #24]
+ 8000e8c:	2301      	movs	r3, #1
+ 8000e8e:	61bb      	str	r3, [r7, #24]
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
- 8000e94:	f107 0310 	add.w	r3, r7, #16
- 8000e98:	4619      	mov	r1, r3
- 8000e9a:	4805      	ldr	r0, [pc, #20]	; (8000eb0 <MX_GPIO_Init+0xf0>)
- 8000e9c:	f000 fc04 	bl	80016a8 <HAL_GPIO_Init>
+ 8000e90:	f107 0310 	add.w	r3, r7, #16
+ 8000e94:	4619      	mov	r1, r3
+ 8000e96:	4805      	ldr	r0, [pc, #20]	; (8000eac <MX_GPIO_Init+0xf0>)
+ 8000e98:	f000 fc06 	bl	80016a8 <HAL_GPIO_Init>
 
 }
- 8000ea0:	bf00      	nop
- 8000ea2:	3720      	adds	r7, #32
- 8000ea4:	46bd      	mov	sp, r7
- 8000ea6:	bd80      	pop	{r7, pc}
- 8000ea8:	40021000 	.word	0x40021000
- 8000eac:	40010800 	.word	0x40010800
- 8000eb0:	40010c00 	.word	0x40010c00
- 8000eb4:	40011000 	.word	0x40011000
+ 8000e9c:	bf00      	nop
+ 8000e9e:	3720      	adds	r7, #32
+ 8000ea0:	46bd      	mov	sp, r7
+ 8000ea2:	bd80      	pop	{r7, pc}
+ 8000ea4:	40021000 	.word	0x40021000
+ 8000ea8:	40010800 	.word	0x40010800
+ 8000eac:	40010c00 	.word	0x40010c00
+ 8000eb0:	40011000 	.word	0x40011000
 
-08000eb8 <HAL_TIM_PeriodElapsedCallback>:
+08000eb4 <HAL_TIM_PeriodElapsedCallback>:
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
- 8000eb8:	b580      	push	{r7, lr}
- 8000eba:	b082      	sub	sp, #8
- 8000ebc:	af00      	add	r7, sp, #0
- 8000ebe:	6078      	str	r0, [r7, #4]
+ 8000eb4:	b580      	push	{r7, lr}
+ 8000eb6:	b082      	sub	sp, #8
+ 8000eb8:	af00      	add	r7, sp, #0
+ 8000eba:	6078      	str	r0, [r7, #4]
+	timerProcess();
+ 8000ebc:	f000 f97e 	bl	80011bc <timerProcess>
 	timerRun();
  8000ec0:	f000 f870 	bl	8000fa4 <timerRun>
 	getKeyInput();
@@ -6130,7 +6106,7 @@ void HAL_TIM_IRQHandler(TIM_HandleTypeDef *htim)
 #else
       HAL_TIM_PeriodElapsedCallback(htim);
  800246a:	6878      	ldr	r0, [r7, #4]
- 800246c:	f7fe fd24 	bl	8000eb8 <HAL_TIM_PeriodElapsedCallback>
+ 800246c:	f7fe fd22 	bl	8000eb4 <HAL_TIM_PeriodElapsedCallback>
 #endif /* USE_HAL_TIM_REGISTER_CALLBACKS */
     }
   }

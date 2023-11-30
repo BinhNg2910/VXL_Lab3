@@ -78,12 +78,12 @@ void Error_Handler(void);
 #define b_GPIO_Port GPIOB
 #define c_Pin GPIO_PIN_2
 #define c_GPIO_Port GPIOB
-#define btnSetVal_Pin GPIO_PIN_13
-#define btnSetVal_GPIO_Port GPIOB
+#define btnMode_Pin GPIO_PIN_13
+#define btnMode_GPIO_Port GPIOB
 #define btnIncrease_Pin GPIO_PIN_14
 #define btnIncrease_GPIO_Port GPIOB
-#define btnMode_Pin GPIO_PIN_15
-#define btnMode_GPIO_Port GPIOB
+#define btnSetVal_Pin GPIO_PIN_15
+#define btnSetVal_GPIO_Port GPIOB
 #define EN0_Pin GPIO_PIN_12
 #define EN0_GPIO_Port GPIOA
 #define EN1_Pin GPIO_PIN_13

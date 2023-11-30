@@ -112,7 +112,7 @@ int main(void)
 //  clearSeg();
   while (1)
   {
-	  timerProcess();
+
 	  fsm_automatic_run();
 	  fsm_manual_run();
 
@@ -252,8 +252,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : btnSetVal_Pin btnIncrease_Pin btnMode_Pin */
-  GPIO_InitStruct.Pin = btnSetVal_Pin|btnIncrease_Pin|btnMode_Pin;
+  /*Configure GPIO pins : btnMode_Pin btnIncrease_Pin btnSetVal_Pin */
+  GPIO_InitStruct.Pin = btnMode_Pin|btnIncrease_Pin|btnSetVal_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -262,6 +262,7 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	timerProcess();
 	timerRun();
 	getKeyInput();
 }

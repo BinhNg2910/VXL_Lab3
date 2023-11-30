@@ -8,18 +8,18 @@
 #include "fsm_manual.h"
 
 void fsm_manual_run(){
-	switch (status){
+	switch(status){
 		case MAN_RED:
-			if(timer5_flag == 1){
-				setTimer5(25);
-				if(ToggleFlag == 0){
-					ToggleFlag = 1;
-					onRed1();
-					onRed2();
-				} else {
-					TurnOffAll();
-				}
-			}
+			 if(timer5_flag == 1){
+			 	setTimer5(25);
+			 	if(ToggleFlag == 0){
+			 		onRed1();
+			 		onRed2();
+			 	} else {
+			 		TurnOffAll();
+			 	}
+			 	ToggleFlag = 1 - ToggleFlag;
+			 }
 			if(isButtonPressed(0) == 1){
 				status = MAN_YELLOW;
 				timerLed7Seg1 = YellowVal;
@@ -33,7 +33,7 @@ void fsm_manual_run(){
 					RedCurr = 2;
 				}
 			}
-			if(isButtonPressed(2) == 2){
+			if(isButtonPressed(2) == 1){
 				RedVal = RedCurr;
 			}
 			break;
@@ -41,12 +41,12 @@ void fsm_manual_run(){
 			if(timer5_flag == 1){
 				setTimer5(25);
 				if(ToggleFlag == 0){
-					ToggleFlag = 1;
 					onYellow1();
 					onYellow2();
 				} else {
 					TurnOffAll();
 				}
+			 	ToggleFlag = 1 - ToggleFlag;
 			}
 			if(isButtonPressed(0) == 1){
 				status = MAN_GREEN;
@@ -61,20 +61,20 @@ void fsm_manual_run(){
 					YellowCurr = 1;
 				}
 			}
-			if(isButtonPressed(2) == 2){
+			if(isButtonPressed(2) == 1){
 				YellowVal = YellowCurr;
 			}
 			break;
 		case MAN_GREEN:
 			if(timer5_flag == 1){
-				setTimer5(10);
+				setTimer5(25);
 				if(ToggleFlag == 0){
-					ToggleFlag = 1;
 					onGreen1();
 					onGreen2();
 				} else {
 					TurnOffAll();
 				}
+			 	ToggleFlag = 1 - ToggleFlag;
 			}
 			if(isButtonPressed(0) == 1){
 				status = RED_GREEN;
@@ -96,13 +96,13 @@ void fsm_manual_run(){
 					YellowCurr = 1;
 				}
 			}
-			if(isButtonPressed(2) == 2){
+			if(isButtonPressed(2) == 1){
 				GreenVal = GreenCurr;
 				YellowVal = RedVal - GreenVal;
 			}
 			break;
 	}
-	if(isButtonPressed(2) == 1){
-		timerLed7Seg1 = RedVal;
-	}
+//	if(isButtonPressed(2) == 1){
+//		timerLed7Seg1 = RedVal;
+//	}
 }
